@@ -48,27 +48,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::resource('/categories', 'CategoryController')->except([
         'show'
     ]);
-
-    Route::post('authors/remove-media', 'AuthorController@removeMedia');
-    Route::resource('authors', 'AuthorController')->except([
-        'show'
-    ]);
-
-    Route::post('narrators/remove-media', 'NarratorController@removeMedia');
-    Route::resource('narrators', 'NarratorController')->except([
-        'show'
-    ]);
-
-    Route::post('books/remove-media', 'BookController@removeMedia');
-    Route::resource('books', 'BookController')->except([
-        'show'
-    ]);
-
-    Route::post('audios/remove-media', 'AudioController@removeMedia');
-    Route::get('audios/{bookId}?', 'AudioController@index');
-    Route::resource('audios', 'AudioController')->except([
-        'show'
-    ]);
 });
 
 // media manager

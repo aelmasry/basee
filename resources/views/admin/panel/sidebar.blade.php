@@ -13,34 +13,6 @@
                 <a class="nav-link {{(Request::has('admin/categories*')) ? 'active': ''}}" href="{{ url('admin/categories') }}">
                     <i class="fa fa-list"></i> {{trans('lang.category_plural')}}</a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.authors.index') }}" class="nav-link {{ Request::is('admin/authors*') ? 'active' : '' }}">
-                    <i class="fa fa-pencil"></i>
-                    {{trans('lang.authors')}}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.narrators.index') }}" class="nav-link {{ Request::is('admin/narrators*') ? 'active' : '' }}">
-                    <i class="fa fa-pencil"></i>
-                    {{trans('lang.narrators')}}
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('admin.books.index') }}"
-                    class="nav-link {{ Request::is('admin/books*') ? 'active' : '' }}">
-                    <i class="fa fa-book"></i>
-                    {{trans('lang.books')}}
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('admin.audios.index') }}" class="nav-link {{ Request::is('admin/audios*') ? 'active' : '' }}">
-                    <i class="fa fa-file-audio-o"></i>
-                    {{trans('lang.audios')}}
-                </a>
-            </li>
-
 
             {{-- Users and Permissions --}}
             <li class="nav-title">
