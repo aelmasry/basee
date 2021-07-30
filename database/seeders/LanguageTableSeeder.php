@@ -1,6 +1,6 @@
 <?php
 
-namespace Backpack\LangFileManager\database\seeds;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

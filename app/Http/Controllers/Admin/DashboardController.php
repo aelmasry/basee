@@ -6,6 +6,7 @@ use App\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Alert;
 class DashboardController extends Controller
 {
 
@@ -42,7 +43,7 @@ class DashboardController extends Controller
 
         if (empty($model)) {
             return response()->json([
-                'success' => false,
+                'status' => 'error',
                 'message' => __('lang.not_found', ['operator' => __('lang.' . strtolower($inputs['model']))]),
             ]);
         }
@@ -56,7 +57,7 @@ class DashboardController extends Controller
         $model->save();
 
         return response()->json([
-            'success' => true,
+            'status' => 'success',
             'message' => __('lang.saved_successfully', ['operator' => __('lang.' . strtolower($inputs['model']))]),
         ]);
     }

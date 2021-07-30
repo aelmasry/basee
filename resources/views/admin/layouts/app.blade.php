@@ -13,6 +13,7 @@
     <!-- Icons -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css">
     <!-- Main styles for this application -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
@@ -22,7 +23,6 @@
     <link rel="stylesheet" href="{{asset('plugins/iCheck/flat/blue.css')}}">
     <!-- select2 -->
     <link rel="stylesheet" href="{{asset('plugins/select2/select2.min.css')}}">
-
     <!-- Scripts -->
     @stack('css_lib')
 
@@ -38,8 +38,9 @@
                 <div class="animated fadeIn">
                     <div class="row">
                         <div class="col-lg-12">
-                            @include('flash::message')
-                            @include('common.errors')
+                            {{-- @include('flash::message')
+                            @include('common.errors') --}}
+                            @include('common.alerts')
                             @yield('content')
                          </div>
                     </div>

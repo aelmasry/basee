@@ -10,7 +10,7 @@ use Flash;
 use App\Http\Controllers\Controller;
 use App\Repositories\UploadRepository;
 use Response;
-
+use Alert;
 class CategoryController extends Controller
 {
     /** @var  CategoryRepository */
@@ -74,6 +74,7 @@ class CategoryController extends Controller
         }
 
         Flash::success('saved successfully.');
+        // Alert::success('saved successfully.');
 
         return redirect(route('admin.categories.index'));
     }
@@ -155,7 +156,12 @@ class CategoryController extends Controller
         }
 
 
-        Flash::success('Category updated successfully.');
+        // Flash::success('Category updated successfully.');
+        // Alert::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
+        // \Alert::add('success', '<strong>Got it</strong><br>This is HTML in a green bubble.');
+        Alert::success('You have successfully logged in')->flash();
+
+
 
         return redirect(route('admin.categories.index'));
     }

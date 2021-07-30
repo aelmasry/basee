@@ -195,6 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        Prologue\Alerts\AlertsServiceProvider::class,
 
     ],
 
@@ -251,7 +252,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
-
+        'Alert' => Prologue\Alerts\Facades\Alert::class,
     ],
 
 ];

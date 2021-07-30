@@ -163,8 +163,36 @@
                     attributeName:attributeName,
                 }
             }).done(function (msg) {
+                Noty.overrideDefaults({
+                    layout: 'topRight',
+                    theme: 'backstrap',
+                    timeout: 2500,
+                    closeWith: ['click', 'button'],
+                });
 
+                new Noty({
+                    type: msg.status,
+                    text: msg.message,
+                    timeout : 5000,
+                }).show();
             });
         });
+
+        window.deleteConfirm = function(formId) {
+            Swal.fire({
+                title: "<strong> {{trans('lang.error')}} </strong>",
+                icon: "warning",
+                html: "<strong> {{trans('lang.do_you_want_to_delete_this')}} </strong>",
+                showCancelButton: true,
+                confirmButtonText: "<i class='fa fa-trash fa-3'></i> {{trans('lang.yes_do_it')}}",
+                confirmButtonColor: "#e3342f",
+                focusConfirm: false,
+                showCloseButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
 </script>
 @endpush

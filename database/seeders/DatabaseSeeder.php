@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\DemoPermissionsPermissionsTableSeeder;
 use Database\Seeders\RoleHasPermissionsTableSeeder;
 use Database\Seeders\RolesTableSeeder;
+use Database\Seeders\LanguageTableSeeder;
 use DB;
 use File;
 use Database\Seeders\UsersTableSeeder;
@@ -27,14 +28,15 @@ class DatabaseSeeder extends Seeder
         $this->call(ModelHasRolesTableSeeder::class);
         $this->call(DemoPermissionsPermissionsTableSeeder::class);
         $this->call(RoleHasPermissionsTableSeeder::class);
+        $this->call(LanguageTableSeeder::class);
 
-        $files = File::allFiles(__dir__ . '/sql_dump');
+        // $files = File::allFiles(__dir__ . '/sql_dump');
 
-        if(!empty($files)) {
-            foreach ($files as $file) {
-                // seed Dump sql
-                DB::unprepared(file_get_contents($file->getPathName()));
-            }
-        }
+        // if(!empty($files)) {
+        //     foreach ($files as $file) {
+        //         // seed Dump sql
+        //         DB::unprepared(file_get_contents($file->getPathName()));
+        //     }
+        // }
     }
 }
