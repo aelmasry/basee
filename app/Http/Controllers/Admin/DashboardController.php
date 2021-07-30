@@ -30,4 +30,34 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard.index');
     }
+
+
+    public function switchStatus(Request $request)
+    {
+        $inputs = $request->all();
+        $modelName = "App\\Models\\" . $inputs['model'];
+        $attributeName = $inputs['attributeName'];
+        $modelName = app()->make($modelName);
+        $model = $modelName::find($inputs['id']);
+
+        if (empty($model)) {
+            return response()->json([
+                'success' => false,
+                'message' => __('lang.not_found', ['operator' => __('lang.' . strtolower($inputs['model']))]),
+            ]);
+        }
+
+        if ($model->$attributeName) {
+            $model->$attributeName = 0;
+        } else {
+            $model->$attributeName = 1;
+        }
+
+        $model->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('lang.saved_successfully', ['operator' => __('lang.' . strtolower($inputs['model']))]),
+        ]);
+    }
 }

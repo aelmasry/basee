@@ -30,7 +30,7 @@ class CategoryDataTable extends DataTable
                 return optional($category->parent)->$name;
             })
             ->editColumn('status', function ($category) {
-                return getBooleanColumn($category, 'status');
+                return getSwitchColumn($category, 'status');
             })
             ->addIndexColumn()
             ->addColumn('action', 'admin.categories.datatables_actions')

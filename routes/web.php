@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::post('/switchStatus', 'DashboardController@switchStatus')->name('switchStatus');
 
     // Users
     Route::get('/users/profile', 'UserController@profile')->name('users.profile');

@@ -81,6 +81,31 @@ if (!function_exists('getBooleanColumn')) {
 }
 
 
+if (!function_exists('getSwitchColumn')) {
+    /**
+     * generate switch column for datatable
+     * @param $model
+     * @return string
+     */
+    function getSwitchColumn($model, $attributeName)
+    {
+        if (isset($model)) {
+            $out = '<label class="switch switch-3d switch-primary switch-sm switchStatus" data-model="' . class_basename($model) . '" data-id="' . $model['id'] . '">';
+            if ($model[$attributeName]) {
+                $out .= '<input type="checkbox" name="' . $attributeName . '" class="switch-input" checked="" value="1">';
+            } else {
+                $out .= '<input type="checkbox" name="' . $attributeName . '" class="switch-input" value="0">';
+            }
+
+            $out .= '<span class="switch-label" data-on="" data-off=""></span>
+                     <span class="switch-handle"></span>
+                     </label>';
+
+            return $out;
+        }
+    }
+}
+
 if (!function_exists('locale')) {
     /**
      * Retrieve our Locale instance
@@ -89,7 +114,7 @@ if (!function_exists('locale')) {
      */
     function locale()
     {
-        return app()->make(App\Locale::class);
+        return app()->make(App\Services\Locale::class);
     }
 }
 

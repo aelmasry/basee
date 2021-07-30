@@ -145,5 +145,26 @@
     }
     $(document).ready(function() { $.fn.dataTableExt.sErrMode = 'none'; });
 
-
 </script>
+
+@push('scripts')
+<script>
+    $( "table" ).delegate(".switchStatus", "change", function(event) {
+            var Id = $(this).data('id');
+            var modelName = $(this).data('model');
+            var attributeName = $(this).find('input[type="checkbox"]').attr('name');
+            $.ajax({
+                method: "POST",
+                url: 'switchStatus',
+                data: {
+                    _token: "{{csrf_token()}}",
+                    id: Id,
+                    model:modelName,
+                    attributeName:attributeName,
+                }
+            }).done(function (msg) {
+
+            });
+        });
+</script>
+@endpush
