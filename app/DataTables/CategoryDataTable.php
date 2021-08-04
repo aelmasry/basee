@@ -59,7 +59,9 @@ class CategoryDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
-            ->parameters([
+            ->parameters(array_merge(
+                config('datatables-buttons.parameters'),
+                [
                     // 'dom'       => 'Bfrtip',
                     'stateSave' => true,
                     'order'     => [[0, 'desc']],
@@ -69,7 +71,8 @@ class CategoryDataTable extends DataTable
                         ),
                         true
                     )
-                ]);
+                ]
+            ));
     }
 
     /**

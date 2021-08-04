@@ -27,6 +27,20 @@
     @stack('css_lib')
 
 </head>
+<!-- BODY options, add following classes to body to change options
+'.header-fixed' - Fixed Header
+'.brand-minimized' - Minimized brand (Only symbol)
+'.sidebar-fixed' - Fixed Sidebar
+'.sidebar-hidden' - Hidden Sidebar
+'.sidebar-off-canvas' - Off Canvas Sidebar
+'.sidebar-minimized'- Minimized Sidebar (Only icons)
+'.sidebar-compact'    - Compact Sidebar
+'.aside-menu-fixed' - Fixed Aside Menu
+'.aside-menu-hidden'- Hidden Aside Menu
+'.aside-menu-off-canvas' - Off Canvas Aside Menu
+'.breadcrumb-fixed'- Fixed Breadcrumb
+'.footer-fixed'- Fixed footer
+-->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     @include('admin.panel.navbar')
     <div class="app-body">
@@ -38,8 +52,8 @@
                 <div class="animated fadeIn">
                     <div class="row">
                         <div class="col-lg-12">
-                            {{-- @include('flash::message')
-                            @include('common.errors') --}}
+                            @include('flash::message')
+                            @include('common.errors')
                             @include('common.alerts')
                             @yield('content')
                          </div>

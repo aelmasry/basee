@@ -26,6 +26,11 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::post('/switchStatus', 'DashboardController@switchStatus')->name('switchStatus');
 
+    // Language
+    Route::get('/languages/texts/{lang?}/{file?}', 'LanguageController@showTexts');
+    Route::post('/languages/texts/{lang}/{file}', 'LanguageController@updateTexts');
+    Route::resource('/languages', 'LanguageController');
+
     // Users
     Route::get('/users/profile', 'UserController@profile')->name('users.profile');
     Route::get('/users/login-as-user/{id}', 'UserController@loginAsUser')->name('users.login-as-user');
@@ -46,6 +51,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::resource('/permissions', 'PermissionController');
     Route::resource('/roles', 'RoleController');
 
+    Route::post('categories/remove-media', 'CategoryController@removeMedia');
     Route::resource('/categories', 'CategoryController')->except([
         'show'
     ]);

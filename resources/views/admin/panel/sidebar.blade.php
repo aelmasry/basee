@@ -51,6 +51,25 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-title">
+                {{trans('lang.advanced')}}
+            </li>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-language"></i> Translations</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item {{ Request::is('admin/languages*') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ url('admin/languages') }}"><i class="nav-icon la la-flag-checkered"></i> Languages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('admin/languages/texts') }}"><i
+                                class="nav-icon la la-language"></i> Site texts</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('admin/medias*') ? 'active' : '' }}" href="{!! url('medias') !!}">
+                    <i class="nav-icon fa fa-picture-o"></i>
+                    {{trans('lang.media_plural')}}</a>
+            </li>
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

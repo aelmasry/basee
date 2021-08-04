@@ -16,7 +16,6 @@ class LanguageTableSeeder extends Seeder
     {
         DB::table('languages')->insert([
             'name'        => 'English',
-            'flag'        => '',
             'abbr'        => 'en',
             'native'    => 'English',
             'active'    => '1',
@@ -25,7 +24,6 @@ class LanguageTableSeeder extends Seeder
 
         DB::table('languages')->insert([
             'name'        => 'Arabic',
-            'flag'        => '',
             'abbr'        => 'ar',
             'native'    => 'العربية',
             'active'    => '0',

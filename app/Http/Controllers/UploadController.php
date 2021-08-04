@@ -22,7 +22,7 @@ class UploadController extends Controller
 
     public function index()
     {
-        return view('uploads.index');
+        return view('medias.index');
     }
 
     /**

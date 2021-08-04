@@ -2,19 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\CustomField;
-use App\Models\User;
+use App\Models\Language;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
-use Barryvdh\DomPDF\Facade as PDF;
 
-class UserDataTable extends DataTable
+class LanguageDataTable extends DataTable
 {
-
-    /**
-     * @var array
-     */
-    public static $customFields = [];
     /**
      * Build DataTable class.
      *
@@ -26,30 +19,27 @@ class UserDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         $columns = array_column($this->getColumns(), 'data');
         return $dataTable
-            ->editColumn('created_at', function ($user) {
-                return getDateColumn($user, 'created_at');
+            ->editColumn('created_at', function ($language) {
+                return getDateColumn($language, 'created_at');
             })
-            ->editColumn('role', function ($user) {
-                return getArrayColumn($user->roles,'name');
+            ->editColumn('active', function ($language) {
+                return getSwitchColumn($language, 'active');
             })
-            ->editColumn('email', function ($user) {
-                return getEmailColumn($user, 'email');
+            ->editColumn('default', function ($language) {
+                return getBooleanColumn($language, 'default');
             })
-            // ->editColumn('avatar', function ($user) {
-            //     return getMediaColumn($user, 'avatar', 'img-circle elevation-2');
-            // })
             ->addIndexColumn()
-            ->addColumn('action', 'admin.users.datatables_actions')
+            ->addColumn('action', 'admin.languages.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Language $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Language $model)
     {
         return $model->newQuery();
     }
@@ -88,7 +78,7 @@ class UserDataTable extends DataTable
      */
     protected function getColumns()
     {
-        $columns = [
+        return [
             [
                 "data" => 'DT_RowIndex',
                 'title' => '#',
@@ -97,20 +87,28 @@ class UserDataTable extends DataTable
             ],
             [
                 'data' => 'name',
-                'title' => trans('lang.full_name'),
+                'title' => trans('lang.name'),
 
             ],
             [
-                'data' => 'email',
-                'title' => trans('lang.email'),
+                'data' => 'native',
+                'title' => trans('lang.native'),
 
             ],
             [
-                'data' => 'role',
-                'title' => trans('lang.user_role'),
-                'orderable' => false,
+                'data' => 'abbr',
+                'title' => trans('lang.abbr'),
+
+            ],
+            [
+                'data' => 'default',
+                'title' => trans('lang.default'),
                 'searchable' => false,
-
+            ],
+            [
+                'data' => 'active',
+                'title' => trans('lang.active'),
+                'searchable' => false,
             ],
             [
                 'data' => 'created_at',
@@ -118,8 +116,6 @@ class UserDataTable extends DataTable
                 'searchable' => false,
             ]
         ];
-
-        return $columns;
     }
 
     /**
@@ -129,17 +125,6 @@ class UserDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'usersdatatable_' . time();
-    }
-
-    /**
-     * Export PDF using DOMPDF
-     * @return mixed
-     */
-    public function pdf()
-    {
-        $data = $this->getDataForPrint();
-        $pdf = PDF::loadView($this->printPreview, compact('data'));
-        return $pdf->download($this->filename() . '.pdf');
+        return 'Language_' . date('YmdHis');
     }
 }

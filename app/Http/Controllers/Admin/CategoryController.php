@@ -70,11 +70,10 @@ class CategoryController extends Controller
                 $mediaItem->copy($category, 'category');
             }
         } catch (ValidatorException $e) {
-            Flash::error($e->getMessage());
+            Alert::error($e->getMessage())->flash();
         }
 
-        Flash::success('saved successfully.');
-        // Alert::success('saved successfully.');
+        Alert::success(__('lang.saved_successfully', ['operator' => __('lang.category')]))->flash();
 
         return redirect(route('admin.categories.index'));
     }
@@ -111,8 +110,7 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->find($id);
         $categories = $this->categoryRepository->where('parent_id', 0)->pluck($this->name, 'id');
         if (empty($category)) {
-            Flash::error('Category not found');
-
+            Alert::error('Category not found')->flash();
             return redirect(route('admin.categories.index'));
         }
 
@@ -136,7 +134,7 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->find($id);
 
         if (empty($category)) {
-            Flash::error('Category not found');
+            Alert::error('Category not found')->flash();
 
             return redirect(route('admin.categories.index'));
         }
@@ -152,16 +150,10 @@ class CategoryController extends Controller
                 $mediaItem->copy($category, 'category');
             }
         } catch (ValidatorException $e) {
-            Flash::error($e->getMessage());
+            Alert::error('Category not found')->flash();
         }
 
-
-        // Flash::success('Category updated successfully.');
-        // Alert::success(__('lang.saved_successfully', ['operator' => __('lang.category')]));
-        // \Alert::add('success', '<strong>Got it</strong><br>This is HTML in a green bubble.');
-        Alert::success('You have successfully logged in')->flash();
-
-
+        Alert::success(__('lang.updated_successfully', ['operator' => __('lang.category')]))->flash();
 
         return redirect(route('admin.categories.index'));
     }
@@ -178,14 +170,14 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->find($id);
 
         if (empty($category)) {
-            Flash::error('Category not found');
+            Alert::error('Category not found')->flash();
 
             return redirect(route('admin.categories.index'));
         }
 
         $this->categoryRepository->delete($id);
 
-        Flash::success('Category deleted successfully.');
+        Alert::success('Category deleted successfully.')->flash();
 
         return redirect(route('admin.categories.index'));
     }

@@ -70,7 +70,7 @@
   </div><!-- /.card -->
 @endsection
 
-@section('after_scripts')
+@push('scripts')
 	<script>
 		jQuery(document).ready(function($) {
 			$("#language_switch").change(function() {
@@ -78,4 +78,4 @@
 			})
 		});
 	</script>
-@endsection
+@endpush

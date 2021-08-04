@@ -213,5 +213,4 @@ return [
     'cant_edit_online' => 'This language file cannot be edited online.',
     'key' => 'Key',
     'language_name' => 'Language name',
-    'default' => 'Default',
 ];
