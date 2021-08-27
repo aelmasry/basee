@@ -3,5 +3,5 @@
      * GET|HEAD /$MODEL_NAME_PLURAL_CAMEL$
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */

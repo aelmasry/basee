@@ -1,59 +1,80 @@
-<?php
+<?php namespace $NAMESPACE_API_TESTS$;
 
-/*
- * This file is part of Psy Shell.
- *
- * (c) 2012-2018 Justin Hileman
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use $NAMESPACE_TESTS$\TestCase;
+use $NAMESPACE_TESTS$\ApiTestTrait;
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
 
-namespace Psy\Test\CodeCleaner;
-
-use Psy\CodeCleaner\UseStatementPass;
-
-class UseStatementPassTest extends CodeCleanerTestCase
+class $MODEL_NAME$ApiTest extends TestCase
 {
-    public function setUp()
+    use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
+
+    /**
+     * @test
+     */
+    public function test_create_$MODEL_NAME_SNAKE$()
     {
-        $this->setPass(new UseStatementPass());
+        $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->make()->toArray();
+
+        $this->response = $this->json(
+            'POST',
+            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$', $$MODEL_NAME_CAMEL$
+        );
+
+        $this->assertApiResponse($$MODEL_NAME_CAMEL$);
     }
 
     /**
-     * @dataProvider useStatements
+     * @test
      */
-    public function testProcess($from, $to)
+    public function test_read_$MODEL_NAME_SNAKE$()
     {
-        $this->assertProcessesAs($from, $to);
+        $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->create();
+
+        $this->response = $this->json(
+            'GET',
+            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
+        );
+
+        $this->assertApiResponse($$MODEL_NAME_CAMEL$->toArray());
     }
 
-    public function useStatements()
+    /**
+     * @test
+     */
+    public function test_update_$MODEL_NAME_SNAKE$()
     {
-        return [
-            [
-                "use StdClass as NotSoStd;\n\$std = new NotSoStd();",
-                '$std = new \\StdClass();',
-            ],
-            [
-                "namespace Foo;\n\nuse StdClass as S;\n\$std = new S();",
-                "namespace Foo;\n\n\$std = new \\StdClass();",
-            ],
-            [
-                "namespace Foo;\n\nuse \\StdClass as S;\n\$std = new S();",
-                "namespace Foo;\n\n\$std = new \\StdClass();",
-            ],
-            [
-                "use Foo\\Bar as fb;\n\$baz = new fb\\Baz();",
-                '$baz = new \\Foo\\Bar\\Baz();',
-            ],
-            [
-                "use Foo\\Bar;\n\$baz = new Bar\\Baz();",
-                '$baz = new \\Foo\\Bar\\Baz();',
-            ],
-            [
-                "namespace Foo;\nuse Bar;\n\$baz = new Bar\\Baz();",
-                "namespace Foo;\n\n\$baz = new \\Bar\\Baz();",
-            ],
-            [
-                "namespace Foo;\n\nuse \\StdClass as S;\n\$std = new S();\nnamespace Foo;\n\n\$std = new S()
+        $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->create();
+        $edited$MODEL_NAME$ = $MODEL_NAME$::factory()->make()->toArray();
+
+        $this->response = $this->json(
+            'PUT',
+            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$,
+            $edited$MODEL_NAME$
+        );
+
+        $this->assertApiResponse($edited$MODEL_NAME$);
+    }
+
+    /**
+     * @test
+     */
+    public function test_delete_$MODEL_NAME_SNAKE$()
+    {
+        $$MODEL_NAME_CAMEL$ = $MODEL_NAME$::factory()->create();
+
+        $this->response = $this->json(
+            'DELETE',
+             '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
+         );
+
+        $this->assertApiSuccess();
+        $this->response = $this->json(
+            'GET',
+            '/$API_PREFIX$/$ROUTE_PREFIX$$MODEL_NAME_PLURAL_SNAKE$/'.$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$
+        );
+
+        $this->response->assertStatus(404);
+    }
+}

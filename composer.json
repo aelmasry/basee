@@ -17,6 +17,7 @@
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
         "prettus/l5-repository": "^2.7",
+        "prologue/alerts": "^0.4.8",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^3.17",
         "yajra/laravel-datatables": "^1.5",
